@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-dostawa-heading">Create or edit a Dostawa</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_adres">Adres</label>
+                    <input type="text" class="form-control" name="adres" id="field_adres"
+                           formControlName="adres"/>
+                    <div *ngIf="editForm.get('adres')!.invalid && (editForm.get('adres')!.dirty || editForm.get('adres')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('adres')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_numerKontaktowy">Numer Kontaktowy</label>
+                    <input type="text" class="form-control" name="numerKontaktowy" id="field_numerKontaktowy"
+                           formControlName="numerKontaktowy"/>
+                    <div *ngIf="editForm.get('numerKontaktowy')!.invalid && (editForm.get('numerKontaktowy')!.dirty || editForm.get('numerKontaktowy')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numerKontaktowy')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataWysylki">Data Wysylki</label>
+                    <div class="d-flex">
+                        <input id="field_dataWysylki" type="datetime-local" class="form-control" name="dataWysylki" formControlName="dataWysylki" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dostawca">Dostawca</label>
+                    <input type="text" class="form-control" name="dostawca" id="field_dostawca"
+                           formControlName="dostawca"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_zamowienie">Zamowienie</label>
+                    <select class="form-control" id="field_zamowienie" name="zamowienie" formControlName="zamowienie">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="zamowienieOption.id === editForm.get('zamowienie')!.value?.id ? editForm.get('zamowienie')!.value : zamowienieOption" *ngFor="let zamowienieOption of zamowienies; trackBy: trackById">{{ zamowienieOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

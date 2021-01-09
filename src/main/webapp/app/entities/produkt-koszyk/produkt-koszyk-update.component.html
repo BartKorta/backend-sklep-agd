@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-produkt-koszyk-heading">Create or edit a Produkt Koszyk</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ilosc">Ilosc</label>
+                    <input type="number" class="form-control" name="ilosc" id="field_ilosc"
+                           formControlName="ilosc"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_suma">Suma</label>
+                    <input type="number" class="form-control" name="suma" id="field_suma"
+                           formControlName="suma"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_koszyk">Koszyk</label>
+                    <select class="form-control" id="field_koszyk" name="koszyk" formControlName="koszyk">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="koszykOption.id === editForm.get('koszyk')!.value?.id ? editForm.get('koszyk')!.value : koszykOption" *ngFor="let koszykOption of koszyks; trackBy: trackById">{{ koszykOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_produkt">Produkt</label>
+                    <select class="form-control" id="field_produkt" name="produkt" formControlName="produkt">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="produktOption.id === editForm.get('produkt')!.value?.id ? editForm.get('produkt')!.value : produktOption" *ngFor="let produktOption of produkts; trackBy: trackById">{{ produktOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_zamowienie">Zamowienie</label>
+                    <select class="form-control" id="field_zamowienie" name="zamowienie" formControlName="zamowienie">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="zamowienieOption.id === editForm.get('zamowienie')!.value?.id ? editForm.get('zamowienie')!.value : zamowienieOption" *ngFor="let zamowienieOption of zamowienies; trackBy: trackById">{{ zamowienieOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "name": "Raport",
+  "fields": [
+    {
+      "fieldName": "opis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dataUtworzenia",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210109194530",
+  "entityTableName": "raport",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

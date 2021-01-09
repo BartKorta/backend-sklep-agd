@@ -48,6 +48,15 @@ public class CacheConfiguration {
             createCache(cm, com.backendsklepagd.domain.User.class.getName());
             createCache(cm, com.backendsklepagd.domain.Authority.class.getName());
             createCache(cm, com.backendsklepagd.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.backendsklepagd.domain.Reklamacja.class.getName());
+            createCache(cm, com.backendsklepagd.domain.Zamowienie.class.getName());
+            createCache(cm, com.backendsklepagd.domain.Platnosc.class.getName());
+            createCache(cm, com.backendsklepagd.domain.Dostawa.class.getName());
+            createCache(cm, com.backendsklepagd.domain.Raport.class.getName());
+            createCache(cm, com.backendsklepagd.domain.Koszyk.class.getName());
+            createCache(cm, com.backendsklepagd.domain.ProduktKoszyk.class.getName());
+            createCache(cm, com.backendsklepagd.domain.Produkt.class.getName());
+            createCache(cm, com.backendsklepagd.domain.ZamowienieRaport.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="zamowienie">
+            <h2><span>Zamowienie</span> {{ zamowienie.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Suma</span></dt>
+                <dd>
+                    <span>{{ zamowienie.suma }}</span>
+                </dd>
+                <dt><span>Data Zamowienia</span></dt>
+                <dd>
+                    <span>{{ zamowienie.dataZamowienia }}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{ zamowienie.user?.id }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/zamowienie', zamowienie.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

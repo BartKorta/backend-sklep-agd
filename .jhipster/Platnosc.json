@@ -1,0 +1,34 @@
+{
+  "name": "Platnosc",
+  "fields": [
+    {
+      "fieldName": "elektroniczna",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "posrednik",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "zamowienie",
+      "otherEntityRelationshipName": "platnosc",
+      "relationshipName": "zamowienie",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20210109194330",
+  "entityTableName": "platnosc",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

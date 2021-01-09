@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dostawa">
+            <h2><span>Dostawa</span> {{ dostawa.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Adres</span></dt>
+                <dd>
+                    <span>{{ dostawa.adres }}</span>
+                </dd>
+                <dt><span>Numer Kontaktowy</span></dt>
+                <dd>
+                    <span>{{ dostawa.numerKontaktowy }}</span>
+                </dd>
+                <dt><span>Data Wysylki</span></dt>
+                <dd>
+                    <span>{{ dostawa.dataWysylki }}</span>
+                </dd>
+                <dt><span>Dostawca</span></dt>
+                <dd>
+                    <span>{{ dostawa.dostawca }}</span>
+                </dd>
+                <dt><span>Zamowienie</span></dt>
+                <dd>
+                    <div *ngIf="dostawa.zamowienie">
+                        <a [routerLink]="['/zamowienie', dostawa.zamowienie?.id, 'view']">{{ dostawa.zamowienie?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dostawa', dostawa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

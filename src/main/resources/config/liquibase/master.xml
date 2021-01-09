@@ -14,7 +14,23 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194130_added_entity_Reklamacja.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194230_added_entity_Zamowienie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194330_added_entity_Platnosc.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194430_added_entity_Dostawa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194530_added_entity_Raport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194630_added_entity_Koszyk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194730_added_entity_ProduktKoszyk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194830_added_entity_Produkt.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194930_added_entity_ZamowienieRaport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210109194130_added_entity_constraints_Reklamacja.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194230_added_entity_constraints_Zamowienie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194330_added_entity_constraints_Platnosc.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194430_added_entity_constraints_Dostawa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194630_added_entity_constraints_Koszyk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194730_added_entity_constraints_ProduktKoszyk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210109194930_added_entity_constraints_ZamowienieRaport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

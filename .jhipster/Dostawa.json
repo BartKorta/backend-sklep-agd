@@ -1,0 +1,48 @@
+{
+  "name": "Dostawa",
+  "fields": [
+    {
+      "fieldName": "adres",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "numerKontaktowy",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "dataWysylki",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "dostawca",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "zamowienie",
+      "otherEntityRelationshipName": "dostawa",
+      "relationshipName": "zamowienie",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20210109194430",
+  "entityTableName": "dostawa",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

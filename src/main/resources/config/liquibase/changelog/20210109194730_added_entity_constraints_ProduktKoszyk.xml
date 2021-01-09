@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity ProduktKoszyk.
+    -->
+    <changeSet id="20210109194730-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="koszyk_id"
+                                 baseTableName="produkt_koszyk"
+                                 constraintName="fk_produkt_koszyk_koszyk_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="koszyk"/>
+
+        <addForeignKeyConstraint baseColumnNames="produkt_id"
+                                 baseTableName="produkt_koszyk"
+                                 constraintName="fk_produkt_koszyk_produkt_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="produkt"/>
+
+        <addForeignKeyConstraint baseColumnNames="zamowienie_id"
+                                 baseTableName="produkt_koszyk"
+                                 constraintName="fk_produkt_koszyk_zamowienie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="zamowienie"/>
+
+    </changeSet>
+</databaseChangeLog>

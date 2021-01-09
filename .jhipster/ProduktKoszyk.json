@@ -1,0 +1,47 @@
+{
+  "name": "ProduktKoszyk",
+  "fields": [
+    {
+      "fieldName": "ilosc",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "suma",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "koszyk",
+      "otherEntityRelationshipName": "produktKoszyk",
+      "relationshipName": "koszyk",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "produkt",
+      "otherEntityRelationshipName": "produktKoszyk",
+      "relationshipName": "produkt",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "zamowienie",
+      "otherEntityRelationshipName": "produktKoszyk",
+      "relationshipName": "zamowienie",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210109194730",
+  "entityTableName": "produkt_koszyk",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

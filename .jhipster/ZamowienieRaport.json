@@ -1,0 +1,31 @@
+{
+  "name": "ZamowienieRaport",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "raport",
+      "otherEntityRelationshipName": "zamowienieRaport",
+      "relationshipName": "raport",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "zamowienie",
+      "otherEntityRelationshipName": "zamowienieRaport",
+      "relationshipName": "zamowienie",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210109194930",
+  "entityTableName": "zamowienie_raport",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,52 @@
+entity Reklamacja {
+	opis String
+}
+entity Zamowienie {
+	suma Double
+    dataZamowienia ZonedDateTime
+}
+entity Platnosc {
+	elektroniczna Boolean
+    posrednik String
+}
+entity Dostawa {
+	adres String required,
+    numerKontaktowy String required,
+    dataWysylki ZonedDateTime,
+  	dostawca String
+}
+
+entity Raport {
+	opis String,
+    dataUtworzenia ZonedDateTime,
+}
+relationship ManyToOne {
+	Zamowienie{user} to User,
+    ProduktKoszyk{koszyk} to Koszyk,
+    ProduktKoszyk {produkt} to Produkt
+    ZamowienieRaport {raport} to Raport
+    ZamowienieRaport {zamowienie} to Zamowienie
+    ProduktKoszyk {zamowienie} to Zamowienie
+}
+entity Koszyk {
+}
+entity ProduktKoszyk {
+	ilosc Integer
+    suma Double
+}
+entity Produkt {
+	nazwa String required,
+    cena Double required,
+    opis String,
+    moc String,
+    dostepnosc String,
+    pojemnosc String
+}
+entity ZamowienieRaport {
+}
+relationship OneToOne {
+	Koszyk{user} to User,
+    Dostawa{zamowienie} to Zamowienie,
+    Platnosc{zamowienie} to Zamowienie,
+    Reklamacja{zamowienie} to Zamowienie
+}

@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="zamowienieRaport">
+            <h2><span>Zamowienie Raport</span> {{ zamowienieRaport.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Raport</span></dt>
+                <dd>
+                    <div *ngIf="zamowienieRaport.raport">
+                        <a [routerLink]="['/raport', zamowienieRaport.raport?.id, 'view']">{{ zamowienieRaport.raport?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Zamowienie</span></dt>
+                <dd>
+                    <div *ngIf="zamowienieRaport.zamowienie">
+                        <a [routerLink]="['/zamowienie', zamowienieRaport.zamowienie?.id, 'view']">{{ zamowienieRaport.zamowienie?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/zamowienie-raport', zamowienieRaport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

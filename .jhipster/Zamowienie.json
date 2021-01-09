@@ -1,0 +1,33 @@
+{
+  "name": "Zamowienie",
+  "fields": [
+    {
+      "fieldName": "suma",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "dataZamowienia",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "zamowienie",
+      "relationshipName": "user",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210109194230",
+  "entityTableName": "zamowienie",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

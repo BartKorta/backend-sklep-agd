@@ -1,0 +1,47 @@
+{
+  "name": "Produkt",
+  "fields": [
+    {
+      "fieldName": "nazwa",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "cena",
+      "fieldType": "Double",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "opis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "moc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dostepnosc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pojemnosc",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210109194830",
+  "entityTableName": "produkt",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

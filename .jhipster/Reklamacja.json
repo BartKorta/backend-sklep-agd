@@ -1,0 +1,30 @@
+{
+  "name": "Reklamacja",
+  "fields": [
+    {
+      "fieldName": "opis",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "zamowienie",
+      "otherEntityRelationshipName": "reklamacja",
+      "relationshipName": "zamowienie",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20210109194130",
+  "entityTableName": "reklamacja",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

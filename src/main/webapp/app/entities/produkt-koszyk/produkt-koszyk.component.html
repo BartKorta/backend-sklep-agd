@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span>Produkt Koszyks</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-produkt-koszyk" [routerLink]="['/produkt-koszyk/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Produkt Koszyk
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="produktKoszyks?.length === 0">
+        <span>No produktKoszyks found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="produktKoszyks && produktKoszyks.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Ilosc</span></th>
+                    <th scope="col" ><span>Suma</span></th>
+                    <th scope="col" ><span>Koszyk</span></th>
+                    <th scope="col" ><span>Produkt</span></th>
+                    <th scope="col" ><span>Zamowienie</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let produktKoszyk of produktKoszyks ;trackBy: trackId">
+                    <td><a [routerLink]="['/produkt-koszyk', produktKoszyk.id, 'view']">{{ produktKoszyk.id }}</a></td>
+                    <td>{{ produktKoszyk.ilosc }}</td>
+                    <td>{{ produktKoszyk.suma }}</td>
+                    <td>
+                        <div *ngIf="produktKoszyk.koszyk">
+                            <a [routerLink]="['/koszyk', produktKoszyk.koszyk?.id, 'view']" >{{ produktKoszyk.koszyk?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="produktKoszyk.produkt">
+                            <a [routerLink]="['/produkt', produktKoszyk.produkt?.id, 'view']" >{{ produktKoszyk.produkt?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="produktKoszyk.zamowienie">
+                            <a [routerLink]="['/zamowienie', produktKoszyk.zamowienie?.id, 'view']" >{{ produktKoszyk.zamowienie?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/produkt-koszyk', produktKoszyk.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/produkt-koszyk', produktKoszyk.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(produktKoszyk)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
