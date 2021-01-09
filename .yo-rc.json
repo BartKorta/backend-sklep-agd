@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.backendsklepagd"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "BackendSklepAGD",
+    "packageName": "com.backendsklepagd",
+    "packageFolder": "com/backendsklepagd",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "M2U3ZTIwNDc1ZDNlNTgwZTlkNjBlZThlNDNmOTYzNDk1MmJkNTIyMGFjM2RkYjI1NjAyODI2NWVkZDg1NzEyNTUxMjc5ZjRlNTg5MGJmYzdhYzdmNTJjNmViMjM5MGQ1NmVjOWE5NzdlNWJiOTg1NzBjZmRkMDIxZjgyMTJmM2Q=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1610220470925,
+    "testFrameworks": ["protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
