@@ -2,6 +2,7 @@ package com.backendsklepagd.repository;
 
 import com.backendsklepagd.domain.Produkt;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface ProduktRepository extends JpaRepository<Produkt, Long> {
 
     @Query("SELECT produktkoszyk.ilosc FROM ProduktKoszyk produktkoszyk WHERE produktkoszyk.zamowienie=null  AND produktkoszyk.koszyk.user.login= ?#{principal.username} ORDER BY produktkoszyk.id")
     List<Integer> getProduktsinKoszykIlosc();
+
+    @Query("SELECT produkt FROM Produkt produkt WHERE produkt.pojemnosc= :category")
+    List<Produkt> getProduktsByCategory(@Param("category") String category);
 }

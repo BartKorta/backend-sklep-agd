@@ -10,6 +10,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +93,10 @@ public class ProduktResource {
         log.debug("REST request to get all Produkts");
         return produktRepository.findAll();
     }
-
+    @GetMapping("/produkts/category/{catText}")
+    public List<Produkt> getProduktsByCategory(@PathVariable("catText") String catText){
+        return produktRepository.getProduktsByCategory(catText);
+    }
     @GetMapping("/produkts/inkoszyk")
     public List<ProduktInKoszykDTO> getProduktsinKoszyk(){
         List<ProduktInKoszykDTO> listOfprod = new ArrayList<ProduktInKoszykDTO>();
