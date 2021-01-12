@@ -64,6 +64,21 @@ public class ProduktKoszykResource {
             .body(result);
     }
 
+    @PostMapping("produkt-koszyks/addbyid/{produktid}/{ile}")
+    public ResponseEntity<ProduktKoszyk> createProduktKoszykByProdId(@PathVariable("produktid") long produktId,@PathVariable("ile") int ile) throws URISyntaxException {
+            ProduktKoszyk pk = new ProduktKoszyk();
+            pk.setProdukt(produktKoszykRepository.getProduktById(produktId));
+            Double suma=produktKoszykRepository.getCena(pk.getProdukt())*ile;
+            pk.setSuma(suma);
+            Koszyk newkoszyk = produktKoszykRepository.getKoszyk();
+            pk.setKoszyk(newkoszyk);
+            pk.setZamowienie(null);
+            pk.setIlosc(ile);
+            ProduktKoszyk result = produktKoszykRepository.save(pk);
+            return ResponseEntity.created(new URI("produkt-koszyks/"+ result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
     /**
      * {@code PUT  /produkt-koszyks} : Updates an existing produktKoszyk.
      *

@@ -17,6 +17,9 @@ public interface ProduktKoszykRepository extends JpaRepository<ProduktKoszyk, Lo
     @Query("SELECT produkt.cena FROM Produkt produkt WHERE produkt= :produkt")
     Double getCena(@Param("produkt") Produkt produkt);
 
+    @Query("SELECT produkt FROM Produkt produkt WHERE produkt.id= :produktId")
+    Produkt getProduktById(@Param("produktId") Long produktId);
+
     @Query("SELECT koszyk FROM Koszyk koszyk WHERE koszyk.user.login = ?#{principal.username}")
     Koszyk getKoszyk();
 }
