@@ -1,12 +1,14 @@
 package com.backendsklepagd.web.rest;
 
 import com.backendsklepagd.domain.Koszyk;
+import com.backendsklepagd.domain.Produkt;
 import com.backendsklepagd.domain.ProduktKoszyk;
 import com.backendsklepagd.repository.ProduktKoszykRepository;
 import com.backendsklepagd.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.checkerframework.checker.nullness.Opt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -98,6 +100,25 @@ public class ProduktKoszykResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, produktKoszyk.getId().toString()))
             .body(result);
+    }
+
+    @PutMapping("/produkt-koszyks/id/{id}/{ile}")
+    public ResponseEntity<ProduktKoszyk> updateProduktKoszykbyId(@PathVariable("id") Long id, @PathVariable("ile") int ile) throws URISyntaxException {
+        Optional<ProduktKoszyk> pk = produktKoszykRepository.findById(id);
+        if(!pk.isPresent()){
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        else {
+            ProduktKoszyk prodKosz=pk.get();
+            prodKosz.setIlosc(ile);
+            prodKosz.setSuma(prodKosz.getProdukt().getCena()*ile);
+            ProduktKoszyk result = produktKoszykRepository.save(prodKosz);
+
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, prodKosz.getId().toString()))
+                .body(result);
+        }
+
     }
 
     /**
