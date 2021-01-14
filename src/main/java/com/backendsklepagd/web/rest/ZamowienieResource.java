@@ -49,6 +49,30 @@ public class ZamowienieResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new zamowienie, or with status {@code 400 (Bad Request)} if the zamowienie has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @PostMapping("zamowienies/new")
+    public ResponseEntity<Zamowienie>createAutoZamowienie() throws URISyntaxException {
+        Zamowienie zamowienie = new Zamowienie();
+        zamowienie.setDataZamowienia(ZonedDateTime.now());
+        User currUser = zamowienieRepository.getCurrentUser();
+        Koszyk usersKoszyk = zamowienieRepository.getCurrentUserKoszyk();
+        List<ProduktKoszyk> list = zamowienieRepository.getListOfNowInKoszyk(usersKoszyk);
+        Double suma=0.0;
+        for(int i=0; i<list.size(); i++)
+            suma+=list.get(i).getSuma();
+        zamowienie.setSuma(suma);
+        zamowienie.setUser(currUser);
+        Zamowienie result = zamowienieRepository.save(zamowienie);
+        for(int i=0; i<list.size(); i++)
+        {
+            ProduktKoszyk prod = list.get(i);
+            prod.setZamowienie(zamowienie);
+            produktKoszykRepository.save(prod);
+        }
+        return ResponseEntity.created(new URI("/api/zamowienies/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
     @PostMapping("/zamowienies")
     public ResponseEntity<Zamowienie> createZamowienie(@RequestBody Zamowienie zamowienie) throws URISyntaxException {
         log.debug("REST request to save Zamowienie : {}", zamowienie);

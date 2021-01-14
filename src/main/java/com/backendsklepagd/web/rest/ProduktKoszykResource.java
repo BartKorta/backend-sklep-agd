@@ -53,6 +53,7 @@ public class ProduktKoszykResource {
         if (produktKoszyk.getId() != null) {
             throw new BadRequestAlertException("A new produktKoszyk cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         Double suma=produktKoszykRepository.getCena(produktKoszyk.getProdukt());
         suma=suma*produktKoszyk.getIlosc();
         produktKoszyk.setSuma(suma);
@@ -66,7 +67,7 @@ public class ProduktKoszykResource {
 
     @PostMapping("produkt-koszyks/addbyid/{produktid}/{ile}")
     public ResponseEntity<ProduktKoszyk> createProduktKoszykByProdId(@PathVariable("produktid") long produktId,@PathVariable("ile") int ile) throws URISyntaxException {
-            if(produktKoszykRepository.getProduktById(produktId) != null)
+            if(produktKoszykRepository.mapProdIDToPRODKOSZYK_id(produktId) != null)
                 return ResponseEntity.badRequest().body(new ProduktKoszyk());
 
             ProduktKoszyk pk = new ProduktKoszyk();
