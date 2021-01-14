@@ -8,6 +8,7 @@ import com.backendsklepagd.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.checkerframework.checker.nullness.Opt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,6 +91,18 @@ public class ProduktKoszykResource {
      * or with status {@code 500 (Internal Server Error)} if the produktKoszyk couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @PutMapping("produkt-koszyks/changeIlosc/{id}/{ile}")
+    public ResponseEntity<ProduktKoszyk> updateProduktKoszykIlosc(@PathVariable("id") long prodKoszykId,@PathVariable("ile") int ile) throws URISyntaxException{
+        if(produktKoszykRepository.findById(prodKoszykId).isPresent()){
+            ProduktKoszyk pk1 = produktKoszykRepository.findById(prodKoszykId).get();
+            pk1.setIlosc(ile);
+            produktKoszykRepository.save(pk1);
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, pk1.getId().toString()))
+                .body(pk1);
+        }
+        else return ResponseEntity.badRequest().body(new ProduktKoszyk());
+    }
     @PutMapping("/produkt-koszyks")
     public ResponseEntity<ProduktKoszyk> updateProduktKoszyk(@RequestBody ProduktKoszyk produktKoszyk) throws URISyntaxException {
         log.debug("REST request to update ProduktKoszyk : {}", produktKoszyk);
