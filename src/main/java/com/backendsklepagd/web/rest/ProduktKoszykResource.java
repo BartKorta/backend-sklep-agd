@@ -69,6 +69,9 @@ public class ProduktKoszykResource {
 
     @PostMapping("produkt-koszyks/addbyid/{produktid}/{ile}")
     public ResponseEntity<ProduktKoszyk> createProduktKoszykByProdId(@PathVariable("produktid") long produktId,@PathVariable("ile") int ile) throws URISyntaxException {
+            if(produktKoszykRepository.getProduktById(produktId) != null)
+                return ResponseEntity.badRequest().body(new ProduktKoszyk());
+
             ProduktKoszyk pk = new ProduktKoszyk();
             pk.setProdukt(produktKoszykRepository.getProduktById(produktId));
             Double suma=produktKoszykRepository.getCena(pk.getProdukt())*ile;
