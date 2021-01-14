@@ -1,15 +1,12 @@
 package com.backendsklepagd.web.rest;
 
 import com.backendsklepagd.domain.Koszyk;
-import com.backendsklepagd.domain.Produkt;
 import com.backendsklepagd.domain.ProduktKoszyk;
 import com.backendsklepagd.repository.ProduktKoszykRepository;
 import com.backendsklepagd.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import net.bytebuddy.implementation.bytecode.Throw;
-import org.checkerframework.checker.nullness.Opt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -95,9 +92,9 @@ public class ProduktKoszykResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("produkt-koszyks/changeIlosc/{id}/{ile}")
-    public ResponseEntity<ProduktKoszyk> updateProduktKoszykIlosc(@PathVariable("id") long prodKoszykId,@PathVariable("ile") int ile) throws URISyntaxException{
-        if(produktKoszykRepository.findById(prodKoszykId).isPresent()){
-            ProduktKoszyk pk1 = produktKoszykRepository.findById(prodKoszykId).get();
+    public ResponseEntity<ProduktKoszyk> updateProduktKoszykIlosc(@PathVariable("id") long prodId,@PathVariable("ile") int ile) throws URISyntaxException{
+        if(produktKoszykRepository.findById(produktKoszykRepository.mapProdIDToPRODKOSZYK_id(prodId)).isPresent()){
+            ProduktKoszyk pk1 = produktKoszykRepository.findById(produktKoszykRepository.mapProdIDToPRODKOSZYK_id(prodId)).get();
             pk1.setIlosc(ile);
             produktKoszykRepository.save(pk1);
             return ResponseEntity.ok()

@@ -22,4 +22,7 @@ public interface ProduktKoszykRepository extends JpaRepository<ProduktKoszyk, Lo
 
     @Query("SELECT koszyk FROM Koszyk koszyk WHERE koszyk.user.login = ?#{principal.username}")
     Koszyk getKoszyk();
+
+    @Query("SELECT prodKoszyk.id FROM ProduktKoszyk prodKoszyk WHERE prodKoszyk.koszyk.user.login = ?#{principal.username} AND prodKoszyk.produkt.id = :productId")
+    Long mapProdIDToPRODKOSZYK_id(@Param("productId") Long  productId);
 }
