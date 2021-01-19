@@ -168,7 +168,7 @@ public class ProduktKoszykResource {
     @DeleteMapping("/produkt-koszyks/{id}")
     public ResponseEntity<Void> deleteProduktKoszyk(@PathVariable Long id) {
         log.debug("REST request to delete ProduktKoszyk : {}", id);
-        produktKoszykRepository.deleteById(id);
+        produktKoszykRepository.deleteById(produktKoszykRepository.mapProdIDToPRODKOSZYK_id(id));
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }
