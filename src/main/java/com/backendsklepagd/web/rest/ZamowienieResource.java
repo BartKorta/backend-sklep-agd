@@ -3,6 +3,7 @@ package com.backendsklepagd.web.rest;
 import com.backendsklepagd.domain.*;
 import com.backendsklepagd.repository.ProduktKoszykRepository;
 import com.backendsklepagd.repository.ZamowienieRepository;
+import com.backendsklepagd.service.dto.PodsumowanieDTO;
 import com.backendsklepagd.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -156,5 +157,21 @@ public class ZamowienieResource {
         log.debug("REST request to delete Zamowienie : {}", id);
         zamowienieRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/zamowienies/podsumowanie")
+    public ResponseEntity<PodsumowanieDTO> getPodsumowanie(){
+        Zamowienie zamowienie = zamowienieRepository.getLatestUserZamowienie().get(0);
+        log.debug("test: " + zamowienie.getId());
+        Long idk = zamowienie.getId();
+        Dostawa dostawa = zamowienieRepository.getLatestDostawaByZamowienieId(idk);
+        log.debug("test:" + dostawa.getId());
+        Platnosc platnosc = zamowienieRepository.getLatestPlatnoscByPlatnoscId(idk);
+        log.debug("test:" + platnosc.getId());
+        PodsumowanieDTO podsumowanie = new PodsumowanieDTO(zamowienie.getId(), zamowienie.getSuma(),dostawa.getAdres(), dostawa.getNumerKontaktowy(),dostawa.getDostawca(), platnosc.getPosrednik());
+        log.debug("dostawca: " + dostawa.getDostawca());
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, podsumowanie.getId().toString()))
+            .body(podsumowanie);
     }
 }

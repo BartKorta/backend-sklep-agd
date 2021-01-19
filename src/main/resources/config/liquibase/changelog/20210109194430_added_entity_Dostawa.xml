@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity Dostawa.
     -->
@@ -14,6 +14,9 @@
         <createTable tableName="dostawa">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="imienazwisko" type="varchar(255)">
+                <constraints nullable="true"/>
             </column>
             <column name="adres" type="varchar(255)">
                 <constraints nullable="false" />
@@ -26,6 +29,9 @@
             </column>
             <column name="dostawca" type="varchar(255)">
                 <constraints nullable="true" />
+            </column>
+            <column name="cena" type="double">
+                <constraints nullable="true"/>
             </column>
             <column name="zamowienie_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_dostawa_zamowienie_id" />

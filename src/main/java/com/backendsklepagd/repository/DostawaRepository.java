@@ -19,4 +19,7 @@ import java.util.List;
 public interface DostawaRepository extends JpaRepository<Dostawa, Long> {
     @Query("SELECT zamowienie FROM Zamowienie zamowienie WHERE zamowienie.user.login = ?#{principal.username} ORDER BY zamowienie.dataZamowienia DESC")
     List<Zamowienie> getLatestZamowienieByUser();
+
+    @Query("SELECT dostawa FROM Dostawa dostawa WHERE dostawa.dostawca=null AND dostawa.zamowienie.user.login = ?#{principal.username} ORDER BY dostawa.dataWysylki DESC")
+    List<Dostawa> getLatestDostawaToChange();
 }
