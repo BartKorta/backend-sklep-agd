@@ -3,6 +3,7 @@ package com.backendsklepagd.web.rest;
 import com.backendsklepagd.domain.Dostawa;
 import com.backendsklepagd.domain.Zamowienie;
 import com.backendsklepagd.repository.DostawaRepository;
+import com.backendsklepagd.repository.ZamowienieRepository;
 import com.backendsklepagd.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -37,9 +38,11 @@ public class DostawaResource {
     private String applicationName;
 
     private final DostawaRepository dostawaRepository;
+    private final ZamowienieRepository zamowienieRepository;
 
-    public DostawaResource(DostawaRepository dostawaRepository) {
+    public DostawaResource(DostawaRepository dostawaRepository, ZamowienieRepository zamowienieRepository) {
         this.dostawaRepository = dostawaRepository;
+        this.zamowienieRepository = zamowienieRepository;
     }
 
     /**
@@ -88,6 +91,24 @@ public class DostawaResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, dostawa.getId().toString()))
             .body(result);
     }
+
+    @PutMapping("/dostawas/{dostawca}/{cena}")
+    public ResponseEntity<Dostawa> updateDostawasRodzaj(@PathVariable("dostawca") String dostawca, @PathVariable("cena") Double cena) throws URISyntaxException{
+        List<Dostawa> latestDostawa = dostawaRepository.getLatestDostawaToChange();
+        if(latestDostawa.size()<1) return ResponseEntity.badRequest().body(new Dostawa());
+
+        Dostawa dostawa = latestDostawa.get(0);
+        dostawa.setDostawca(dostawca);
+        dostawa.setCena(cena);
+        Zamowienie z = dostawa.getZamowienie();
+        z.setSuma(z.getSuma()+cena);
+        Dostawa result = dostawaRepository.save(dostawa);
+        zamowienieRepository.save(z);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, dostawa.getId().toString()))
+            .body(result);
+    }
+
 
     /**
      * {@code GET  /dostawas} : get all the dostawas.

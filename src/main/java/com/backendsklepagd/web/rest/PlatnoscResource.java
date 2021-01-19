@@ -47,6 +47,18 @@ public class PlatnoscResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new platnosc, or with status {@code 400 (Bad Request)} if the platnosc has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @PostMapping("/platnoscs/{czyelektr}/{posrednik}")
+    public ResponseEntity<Platnosc> createWithPosrednik(@PathVariable("czyelektr") Boolean czyelektr, @PathVariable("posrednik") String posrednik) throws URISyntaxException {
+        Platnosc platnosc = new Platnosc();
+        platnosc.setZamowienie(platnoscRepository.getLatestZamowienieByUser().get(0));
+        platnosc.setElektroniczna(czyelektr);
+        if(czyelektr) platnosc.setPosrednik(posrednik);
+        else platnosc.setPosrednik("");
+        Platnosc result = platnoscRepository.save(platnosc);
+        return ResponseEntity.created(new URI("/api/platnoscs/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
     @PostMapping("/platnoscs")
     public ResponseEntity<Platnosc> createPlatnosc(@RequestBody Platnosc platnosc) throws URISyntaxException {
         log.debug("REST request to save Platnosc : {}", platnosc);

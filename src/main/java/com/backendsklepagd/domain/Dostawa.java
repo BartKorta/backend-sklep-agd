@@ -24,6 +24,9 @@ public class Dostawa implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column (name = "imienazwisko", nullable = false)
+    private String imieNazwisko;
+
     @NotNull
     @Column(name = "adres", nullable = false)
     private String adres;
@@ -37,6 +40,9 @@ public class Dostawa implements Serializable {
 
     @Column(name = "dostawca")
     private String dostawca;
+
+    @Column(name = "cena")
+    private Double cena;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -58,6 +64,14 @@ public class Dostawa implements Serializable {
     public Dostawa adres(String adres) {
         this.adres = adres;
         return this;
+    }
+
+    public String getImieNazwisko() {
+        return imieNazwisko;
+    }
+
+    public void setImieNazwisko(String imieNazwisko) {
+        this.imieNazwisko = imieNazwisko;
     }
 
     public void setAdres(String adres) {
@@ -97,6 +111,14 @@ public class Dostawa implements Serializable {
     public Dostawa dostawca(String dostawca) {
         this.dostawca = dostawca;
         return this;
+    }
+
+    public Double getCena() {
+        return cena;
+    }
+
+    public void setCena(Double cena) {
+        this.cena = cena;
     }
 
     public void setDostawca(String dostawca) {

@@ -1,9 +1,6 @@
 package com.backendsklepagd.repository;
 
-import com.backendsklepagd.domain.Koszyk;
-import com.backendsklepagd.domain.ProduktKoszyk;
-import com.backendsklepagd.domain.User;
-import com.backendsklepagd.domain.Zamowienie;
+import com.backendsklepagd.domain.*;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +26,14 @@ public interface ZamowienieRepository extends JpaRepository<Zamowienie, Long> {
 
     @Query("SELECT produktkoszyk FROM ProduktKoszyk produktkoszyk WHERE produktkoszyk.koszyk= :koszyk AND produktkoszyk.zamowienie=null")
     List<ProduktKoszyk> getListOfNowInKoszyk(@Param("koszyk") Koszyk koszyk);
+
+    @Query("SELECT zamowienie FROM Zamowienie zamowienie WHERE zamowienie.user.login= ?#{principal.username} ORDER BY zamowienie.dataZamowienia DESC")
+    List<Zamowienie> getLatestUserZamowienie();
+
+    @Query("SELECT dostawa FROM Dostawa dostawa WHERE dostawa.zamowienie.id = :zamowienieId")
+    Dostawa getLatestDostawaByZamowienieId(@Param("zamowienieId") Long zamowienieId);
+
+    @Query("SELECT platnosc FROM Platnosc platnosc WHERE platnosc.zamowienie.id = :zamowienieId")
+    Platnosc getLatestPlatnoscByPlatnoscId(@Param("zamowienieId") Long zamowienieId);
+
 }

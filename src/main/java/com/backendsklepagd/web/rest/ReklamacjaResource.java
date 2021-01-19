@@ -1,7 +1,9 @@
 package com.backendsklepagd.web.rest;
 
 import com.backendsklepagd.domain.Reklamacja;
+import com.backendsklepagd.domain.Zamowienie;
 import com.backendsklepagd.repository.ReklamacjaRepository;
+import com.backendsklepagd.service.dto.ReklamacjaDTO;
 import com.backendsklepagd.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -47,15 +49,22 @@ public class ReklamacjaResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/reklamacjas")
-    public ResponseEntity<Reklamacja> createReklamacja(@RequestBody Reklamacja reklamacja) throws URISyntaxException {
+    public ResponseEntity<ReklamacjaDTO> createReklamacja(@RequestBody ReklamacjaDTO reklamacja) throws URISyntaxException {
         log.debug("REST request to save Reklamacja : {}", reklamacja);
         if (reklamacja.getId() != null) {
             throw new BadRequestAlertException("A new reklamacja cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Reklamacja result = reklamacjaRepository.save(reklamacja);
-        return ResponseEntity.created(new URI("/api/reklamacjas/" + result.getId()))
+        if(reklamacjaRepository.getZamowienieForReklamacja(reklamacja.getZamowienieId())==null){
+            return ResponseEntity.badRequest().body(reklamacja);
+        }
+        Zamowienie zamowienie = reklamacjaRepository.getZamowienieForReklamacja(reklamacja.getZamowienieId());
+        Reklamacja result = new Reklamacja();
+        result.setOpis(reklamacja.getOpis());
+        result.setZamowienie(zamowienie);
+        Reklamacja rx = reklamacjaRepository.save(result);
+        return ResponseEntity.created(new URI("/api/reklamacjas/" + reklamacja.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+            .body(reklamacja);
     }
 
     /**
